@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<robot name="strirus_gamma" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    		<robotNamespace>/strirus_legged_robot</robotNamespace>
+  	</plugin>
+    </gazebo>
+    <!-- 	<xacro:arg name="namespace" default="/"/>
+        <xacro:property name="namespace" value="$(arg namespace)" /> -->
+
+
+    <!-- Some constants -->
+    <xacro:property name="deg2rad" value="${pi / 180}"/>
+    <xacro:property name="rad2deg" value="${180 / pi}"/>
+    <xacro:property name="number_of_legs" value="${6 - 1}"/>
+    <xacro:property name="amount_of_legs_one_part" value="${3}"/>
+    <!-- Constants for simulating -->
+    <!-- Xacro arg provides xacro.py file.xacro real_number_of_legs:=12 -->
+
+
+    <!-- simulation  options-->
+    <!-- doc="0 - no, 1 - yes" -->
+    <xacro:arg name="ideal_leg_motors" default="1"/>
+    <!-- doc="0 - no, 1 - yes" -->
+    <xacro:arg name="ideal_segment_joint" default="1"/>
+    <!-- doc="0 - no, 1 - yes" -->
+    <xacro:arg name="leg_fancy_physics" default="0"/>
+
+    <!-- omni-directional -->
+    <!-- doc="possible angles 0,15,30,45" -->
+    <xacro:arg name="omni_angle" default="15"/>
+
+    <!-- leg size -->
+    <!--  doc="0 - 55, 1 - 70" -->
+    <xacro:arg name="leg_height" default="1"/>
+
+    <!-- angle between legs -->
+    <!--  doc="in degrees, or 'specific' for choosing specific angle for each leg (cclock)" -->
+    <xacro:arg name="angle_btw_legs" default="120"/>
+    <!-- doc="in degrees" -->
+    <xacro:arg name="angle_for_0_l_leg" default="0"/>
+    <!-- doc="in degrees" -->
+    <xacro:arg name="angle_for_0_r_leg" default="0"/>
+    <!-- any angle sequence -->
+    <xacro:arg name="l_specific_angle_btw_legs" default="0,180,0,0,10,0"/>
+    <!-- any angle sequence -->
+    <xacro:arg name="r_specific_angle_btw_legs" default="0,0,5,0,0,0"/>
+
+    <!-- segmentation -->
+    <!-- doc="possible '0','1up','1side','2'" -->
+    <xacro:arg name="segment_dof" default="2"/>
+    <!--  doc="in degrees" -->
+    <xacro:arg name="up_segment_angle" default="0"/>
+    <!--  doc="in degrees" -->
+    <xacro:arg name="side_segment_angle" default="0"/>
+
+    <!-- arg to properties with converting to rad if it is needed -->
+    <!-- simulation  options-->
+    <xacro:property name="ideal_leg_motors" value="$(arg ideal_leg_motors)"/>
+    <xacro:property name="ideal_segment_joint" value="$(arg ideal_segment_joint)"/>
+    <xacro:property name="leg_fancy_physics" value="$(arg leg_fancy_physics)"/>
+    <!-- omni-directional -->
+    <xacro:property name="omni_angle" value="$(arg omni_angle)"/>
+
+    <!-- leg size -->
+    <xacro:property name="leg_height" value="$(arg leg_height)"/>
+    <xacro:if value="${leg_height == 1}">
+        <xacro:property name="leg_height_size" value="${0.07}"/>
+    </xacro:if>
+    <xacro:if value="${leg_height == 0}">
+        <xacro:property name="leg_height_size" value="${0.055}"/>
+    </xacro:if>
+
+    <!-- angle between legs -->
+    <xacro:property name="angle_btw_legs" value="$(arg angle_btw_legs)"/>
+
+    <xacro:if value="${str(angle_btw_legs) == 'specific'}">
+        <xacro:property name="l_specific_angle_btw_legs" value="$(arg l_specific_angle_btw_legs)"/>
+        <xacro:property name="r_specific_angle_btw_legs" value="$(arg r_specific_angle_btw_legs)"/>
+    </xacro:if>
+    <xacro:if value="${str(angle_btw_legs) != 'specific'}">
+        <xacro:property name="angle_for_0_l_leg" value="$(arg angle_for_0_l_leg)"/>
+        <xacro:property name="angle_for_0_r_leg" value="$(arg angle_for_0_r_leg)"/>
+    </xacro:if>
+    <!-- segmentation -->
+    <xacro:property name="segment_dof" value="$(arg segment_dof)"/>
+    <xacro:property name="up_segment_angle" value="$(arg up_segment_angle)"/>
+    <xacro:property name="side_segment_angle" value="$(arg side_segment_angle)"/>
+
+
+    <!-- Needed constants-variables -->
+    <xacro:property name="dist_btw_legs" value="${0.106}"/>
+    <xacro:property name="dist_btw_body_origins" value="${0.554}"/>
+    <xacro:property name="leg_thickness" value="${0.004}"/>
+
+    <xacro:property name="dist_body_1_bridge_1" value="${0.247}"/>
+    <xacro:property name="dist_bridge_1_bridge_2" value="${0.03}"/>
+    <xacro:property name="dist_bridge_2_body_2" value="${0.03}"/>
+    <xacro:property name="dist_body_2_leg_count_point" value="${0.247}"/>
+
+
+    <!-- includes parts -->
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <!-- <xacro:include filename="$(find strirus_robot_description)/urdf/strirus_plugins.gazebo" /> -->
+    <!-- Import Rviz colors -->
+    <xacro:include filename="$(find strirus_robot_description)/urdf/materials.xacro"/>
+    <xacro:include filename="$(find strirus_robot_description)/urdf/strirus_gamma_body_bridge.xacro"/>
+    <xacro:include filename="$(find strirus_robot_description)/urdf/strirus_gamma_legs.xacro"/>
+    <xacro:include filename="$(find strirus_robot_description)/urdf/strirus_gamma_gazebo.gazebo"/>
+
+</robot>

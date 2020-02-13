@@ -1,0 +1,23 @@
+<launch>
+    <!-- args for changing robot params -->
+    <arg name="use_sim_time" default="true"/>
+ 
+ 
+	<include file="$(find strirus_robot_description)/launch/robot_description_gen.xml"/>
+
+    <!-- Launch the room -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!--<arg name="world_name" value="$(find strirus_gazebo)/worlds/testing_area.world"/> -->
+        <arg name="paused" value="true"/>
+        <arg name="physics" default="ode"/>
+        <arg name="verbose" default="true"/>'
+        <arg name="gui" value="true"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    </include>
+
+    <!-- Spawn a robot into Gazebo -->
+    <!--<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find plastun_description)/urdf/plastun.urdf -urdf -z 0.001 -model plastun" /> -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -model strirus_gamma -param robot_description"/>
+
+</launch>
