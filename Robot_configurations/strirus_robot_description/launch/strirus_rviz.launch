@@ -1,0 +1,18 @@
+<launch>
+
+    <!-- simulation  options-->
+    <arg name="gui" default="true"/>
+    <arg name="rvizconfig" default="$(find strirus_robot_description)/rviz/static.rviz"/>
+
+
+	<include file="$(find strirus_robot_description)/launch/robot_description_gen.xml"/>
+
+
+    <param name="use_gui" value="$(arg gui)"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+    <remap from="/joint_states" to="/strirus/joint_states"/>
+
+</launch>

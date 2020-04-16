@@ -1,0 +1,42 @@
+  <launch>
+    <arg name="ideal_leg_motors" default="1" doc="0 - no, 1 - yes"/>
+    <arg name="ideal_segment_joint" default="1" doc="0 - no, 1 - yes"/>
+    <arg name="leg_fancy_physics" default="0" doc="0 - no, 1 - yes"/>
+
+    <!-- omni-directional -->
+    <arg name="omni_angle" default="15" doc="possible angles 0,15,30,45"/>
+
+    <!-- leg size -->
+    <arg name="leg_height" default="1" doc="0 - 55, 1 - 70"/>
+
+    <!-- angle between legs -->
+    <arg name="angle_btw_legs" default="120"
+       doc="in degrees, or 'specific' for choosing specific angle for each leg (cclock)"/>
+   <arg name="angle_for_0_l_leg" default="0" doc="in degrees"/>
+   <arg name="angle_for_0_r_leg" default="0" doc="in degrees"/>
+   <arg name="l_specific_angle_btw_legs" default="0,0,0,0,0,0" doc=""/>
+   <arg name="r_specific_angle_btw_legs" default="0,0,0,0,0,0" doc=""/>
+
+   <!-- segmentation -->
+   <arg name="segment_dof" default="2" doc="possible '0','1up','1side','2'"/>
+   <arg name="up_segment_angle" default="0" doc="in degrees"/>
+   <arg name="side_segment_angle" default="0" doc="in degrees"/>
+
+
+   <param name="robot_description"
+     command="$(find xacro)/xacro --inorder '$(find strirus_robot_description)/urdf/strirus_gamma.xacro'
+     ideal_leg_motors:=$(arg ideal_leg_motors) 
+     ideal_segment_joint:=$(arg ideal_segment_joint) 
+     leg_fancy_physics:=$(arg leg_fancy_physics)
+     omni_angle:=$(arg omni_angle) 
+     leg_height:=$(arg leg_height) 
+     angle_btw_legs:=$(arg angle_btw_legs)
+     angle_for_0_l_leg:=$(arg angle_for_0_l_leg) 
+     angle_for_0_r_leg:=$(arg angle_for_0_r_leg)
+     l_specific_angle_btw_legs:=$(arg l_specific_angle_btw_legs) 
+     r_specific_angle_btw_legs:=$(arg r_specific_angle_btw_legs)
+     segment_dof:=$(arg segment_dof) 
+     up_segment_angle:=$(arg up_segment_angle) 
+     side_segment_angle:=$(arg side_segment_angle)"/>
+   
+</launch>

@@ -1,0 +1,20 @@
+<launch>
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find strirus_control)/config/strirus_control.yaml" command="load"/>
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/strirus_legged_robot" args="joint_state_controller
+    joint5_position_controller_l joint5_position_controller_r
+    joint4_position_controller_l joint4_position_controller_r 
+    joint3_position_controller_l joint3_position_controller_r
+    joint2_position_controller_l joint2_position_controller_r
+    joint1_position_controller_l joint1_position_controller_r
+    joint0_position_controller_l joint0_position_controller_r "/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="strirus_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/strirus_legged_robot/joint_states" />
+  </node>
+
+</launch>

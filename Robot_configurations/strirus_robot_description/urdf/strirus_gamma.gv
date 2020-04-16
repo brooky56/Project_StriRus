@@ -1,0 +1,59 @@
+digraph G {
+node [shape=box];
+"base_footprint" [label="base_footprint"];
+"body_1_part" [label="body_1_part"];
+"tof_camera_1" [label="tof_camera_1"];
+"leg_left_0" [label="leg_left_0"];
+"leg_left_1" [label="leg_left_1"];
+"leg_left_2" [label="leg_left_2"];
+"leg_right_0" [label="leg_right_0"];
+"leg_right_1" [label="leg_right_1"];
+"leg_right_2" [label="leg_right_2"];
+"bridge_1_part" [label="bridge_1_part"];
+"bridge_2_part" [label="bridge_2_part"];
+"body_2_part" [label="body_2_part"];
+"tof_camera_2" [label="tof_camera_2"];
+"leg_left_3" [label="leg_left_3"];
+"leg_left_4" [label="leg_left_4"];
+"leg_left_5" [label="leg_left_5"];
+"leg_right_3" [label="leg_right_3"];
+"leg_right_4" [label="leg_right_4"];
+"leg_right_5" [label="leg_right_5"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_footprint" -> "base_footprint_body_1_part_fixed" [label="xyz: 0 0 0.07 \nrpy: 0 -0 0"]
+"base_footprint_body_1_part_fixed" -> "body_1_part"
+"body_1_part" -> "body_1_part_tof_camera_1_fixed" [label="xyz: -0.0375 0 0 \nrpy: 0 -0 0"]
+"body_1_part_tof_camera_1_fixed" -> "tof_camera_1"
+"body_1_part" -> "leg_left_0_revolute_joint" [label="xyz: -0.00789398 0.159461 0 \nrpy: 0 -0 0.261799"]
+"leg_left_0_revolute_joint" -> "leg_left_0"
+"body_1_part" -> "leg_left_1_revolute_joint" [label="xyz: 0.098106 0.159461 0 \nrpy: 3.14159 1.0472 -2.87979"]
+"leg_left_1_revolute_joint" -> "leg_left_1"
+"body_1_part" -> "leg_left_2_revolute_joint" [label="xyz: 0.204106 0.159461 0 \nrpy: 3.14159 -1.0472 -2.87979"]
+"leg_left_2_revolute_joint" -> "leg_left_2"
+"body_1_part" -> "leg_right_0_revolute_joint" [label="xyz: -0.00789398 -0.159461 0 \nrpy: 0 0 -0.261799"]
+"leg_right_0_revolute_joint" -> "leg_right_0"
+"body_1_part" -> "leg_right_1_revolute_joint" [label="xyz: 0.098106 -0.159461 0 \nrpy: -3.14159 1.0472 2.87979"]
+"leg_right_1_revolute_joint" -> "leg_right_1"
+"body_1_part" -> "leg_right_2_revolute_joint" [label="xyz: 0.204106 -0.159461 0 \nrpy: 3.14159 -1.0472 2.87979"]
+"leg_right_2_revolute_joint" -> "leg_right_2"
+"body_1_part" -> "segment_side_revolute" [label="xyz: 0.247 0 0 \nrpy: 0 0 0"]
+"segment_side_revolute" -> "bridge_1_part"
+"bridge_1_part" -> "segment_up_revolute" [label="xyz: 0.03 0 0 \nrpy: 0 -0 0"]
+"segment_up_revolute" -> "bridge_2_part"
+"bridge_2_part" -> "bridge_2_part_body_2_part_fixed" [label="xyz: 0.03 0 0 \nrpy: 0 -0 0"]
+"bridge_2_part_body_2_part_fixed" -> "body_2_part"
+"body_2_part" -> "body_2_part_tof_camera_2_fixed" [label="xyz: -0.2845 0 0 \nrpy: 0 -0 0"]
+"body_2_part_tof_camera_2_fixed" -> "tof_camera_2"
+"body_2_part" -> "leg_left_3_revolute_joint" [label="xyz: 0.254894 0.159461 0 \nrpy: -6.31089e-30 4.13646e-13 -0.261799"]
+"leg_left_3_revolute_joint" -> "leg_left_3"
+"body_2_part" -> "leg_left_4_revolute_joint" [label="xyz: 0.148894 0.159461 0 \nrpy: -3.14159 1.0472 2.87979"]
+"leg_left_4_revolute_joint" -> "leg_left_4"
+"body_2_part" -> "leg_left_5_revolute_joint" [label="xyz: 0.042894 0.159461 0 \nrpy: -3.14159 -1.0472 2.87979"]
+"leg_left_5_revolute_joint" -> "leg_left_5"
+"body_2_part" -> "leg_right_3_revolute_joint" [label="xyz: 0.254894 -0.159461 0 \nrpy: 6.31089e-30 4.13646e-13 0.261799"]
+"leg_right_3_revolute_joint" -> "leg_right_3"
+"body_2_part" -> "leg_right_4_revolute_joint" [label="xyz: 0.148894 -0.159461 0 \nrpy: 3.14159 1.0472 -2.87979"]
+"leg_right_4_revolute_joint" -> "leg_right_4"
+"body_2_part" -> "leg_right_5_revolute_joint" [label="xyz: 0.042894 -0.159461 0 \nrpy: 3.14159 -1.0472 -2.87979"]
+"leg_right_5_revolute_joint" -> "leg_right_5"
+}
